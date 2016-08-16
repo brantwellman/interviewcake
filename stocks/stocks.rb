@@ -10,11 +10,12 @@ class Stocks
     max_profits = []
     stock_prices_yesterday.each_with_index do |price, index|
       selling_prices = stock_prices_yesterday[index + 1..-1]
-      unless index == stock_prices_yesterday.size - 1
-        max_price = selling_prices.max
-        potential_max_profit = max_price - price
-        max_profits.push(potential_max_profit)
+      if index == stock_prices_yesterday.size - 1
+        next
       end
+      max_price = selling_prices.max
+      potential_max_profit = max_price - price
+      max_profits.push(potential_max_profit)
     end
     max_profits.max
   end
