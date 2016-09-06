@@ -43,7 +43,7 @@ class HighestProductTest < Minitest::Test
   end
 
   def test_returns_highest_product_with_two_negative_numbers_involved
-    integers = [-10, -10, 1, 3, 2]
+    integers = [-10, 1, 3, 2, -10]
 
     assert_equal 300, @hp.calculate(integers)
   end
@@ -52,5 +52,23 @@ class HighestProductTest < Minitest::Test
     integers = [-10, 10, 1, 3, 2]
 
     assert_equal 60, @hp.calculate(integers)
+  end
+
+  def test_returns_highest_product_with_zero_in_array
+    integers = [-10, 10, 0, 3, 2]
+
+    assert_equal 60, @hp.calculate(integers)
+  end
+
+  def test_returns_zero_as_product_with_zero_involved
+    integers = [-10, 0, 3, 2]
+
+    assert_equal 0, @hp.calculate(integers)
+  end
+
+  def test_returns_highest_product_with_three_negative_numbers_in_array
+    integers = [-10, -10, 1, -3, 2]
+
+    assert_equal 200, @hp.calculate(integers)
   end
 end
