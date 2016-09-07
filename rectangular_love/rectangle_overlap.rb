@@ -6,6 +6,7 @@ class RectangleOverlap
     @rect_2 = rect_2
   end
 
+# Should be able to refactor to make x and y overlap methods one method
   def x_overlap
     high_start_x  = [@rect_1['x'], @rect_2['x']].max
     low_end_x = [(@rect_1['x'] + @rect_1['width']), (@rect_2['x'] + @rect_2['width'])].min
@@ -26,8 +27,15 @@ class RectangleOverlap
       { 'y' => nil, 'height' => nil }
     else
       overlap_height = low_end_y - high_start_y
-      # binding.pry
       { 'y' => high_start_y, 'height' => overlap_height }
     end
+  end
+
+  def full_overlap
+    overlap = y_overlap.merge(x_overlap)
+    if overlap.values.any? { |v| v == nil }
+      overlap = "There is no overlap"
+    end
+    overlap
   end
 end
