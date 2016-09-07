@@ -17,4 +17,17 @@ class RectangleOverlap
       { 'x' => high_start_x, 'width' => overlap_width }
     end
   end
+
+  def y_overlap
+    high_start_y = [@rect_1['y'], @rect_2['y']].max
+    low_end_y = [(@rect_1['y'] + @rect_1['height']), (@rect_2['y'] + @rect_2['height'])].min
+
+    if high_start_y >= low_end_y
+      { 'y' => nil, 'height' => nil }
+    else
+      overlap_height = low_end_y - high_start_y
+      # binding.pry
+      { 'y' => high_start_y, 'height' => overlap_height }
+    end
+  end
 end

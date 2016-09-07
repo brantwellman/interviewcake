@@ -26,4 +26,23 @@ class RectangleOverlapTest < Minitest::Test
 
     assert_equal overlap, ro.x_overlap
   end
+
+  def test_returns_overlap_y_start_and_height
+    rect_1 = { "x" => 1, "y" => 1, 'width' => 3, 'height' => 4}
+    rect_2 = { 'x' => 3, 'y' => 4, 'width' => 2, 'height' => 3}
+    ro = RectangleOverlap.new(rect_1, rect_2)
+    overlap = { "y" => 4, 'height' => 1}
+
+    assert_equal overlap, ro.y_overlap
+  end
+
+  def test_returns_overlap_y_start_and_width_as_nils_if_no_overlap
+    rect_1 = { "x" => 1, "y" => 1, 'width' => 3, 'height' => 4}
+    rect_2 = { 'x' => 4, 'y' => 5, 'width' => 2, 'height' => 3}
+    ro = RectangleOverlap.new(rect_1, rect_2)
+    overlap = { "y" => nil, 'height' => nil}
+
+    assert_equal overlap, ro.y_overlap
+  end
+
 end
